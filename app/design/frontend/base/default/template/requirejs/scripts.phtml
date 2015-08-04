@@ -1,0 +1,34 @@
+<?php
+/**
+ * Mtaube (https://github.com/mtaube)
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2015 Matt Taube
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+?>
+<?php $isModules = !empty($this->getModuleNames()); ?>
+
+<script type="text/javascript">
+    var require = {
+        baseUrl: '<?php echo $this->getSkinUrl("js") ?>',
+    };
+</script>
+
+<script type="text/javascript" src="<?php echo $this->getJsUrl('requirejs/require.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->getBuiltCommonJsUrl() ?>"></script>
+<?php if ($isModules): ?>
+    <script type="text/javascript" src="<?php echo $this->getBuiltModuleSetJsUrl() ?>"></script>
+<?php endif ?>
+
+
+<script>
+    if (window.jQuery) $.noConflict();
+
+    require(['common'], function () {
+        <?php if ($isModules): ?>
+            require(['<?php echo implode("','", $this->getModuleNames()) ?>']);
+        <?php endif ?>
+    });
+</script>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mtaube (https://github.com/mtaube)
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2015 Matt Taube
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+-->
+<layout version="0.1.0">
+    <default>
+        <reference name="before_body_end">
+            <block type="requirejs/scripts" name="requirejs" template="requirejs/scripts.phtml">
+                <action method="addJs">
+                    <script>requirejs/require.js</script>
+                </action>
+            </block>
+        </reference>
+    </default>
+</layout>

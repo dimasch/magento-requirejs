@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mtaube_Requirejs>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Mtaube_Requirejs>
+    </modules>
+</config>

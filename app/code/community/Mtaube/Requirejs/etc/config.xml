@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mtaube (https://github.com/mtaube)
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2015 Matt Taube
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+-->
+<config>
+    <modules>
+        <Mtaube_Requirejs>
+            <version>0.1.0</version>
+        </Mtaube_Requirejs>
+    </modules>
+
+    <global>
+        <blocks>
+            <requirejs>
+                <class>Mtaube_Requirejs_Block</class>
+            </requirejs>
+        </blocks>
+
+        <events>
+            <clean_media_cache_after>
+                <observers>
+                    <clean_built_module_set_js>
+                        <class>requirejs/observer</class>
+                        <method>cleanBuiltModuleSetJs</method>
+                    </clean_built_module_set_js>
+                </observers>
+            </clean_media_cache_after>
+        </events>
+
+        <helpers>
+            <requirejs>
+                <class>Mtaube_Requirejs_Helper</class>
+            </requirejs>
+        </helpers>
+
+        <models>
+            <requirejs>
+                <class>Mtaube_Requirejs_Model</class>
+            </requirejs>
+        </models>
+    </global>
+
+    <frontend>
+        <layout>
+            <updates>
+                <requirejs>
+                    <file>requirejs.xml</file>
+                </requirejs>
+            </updates>
+        </layout>
+    </frontend>
+</config>
