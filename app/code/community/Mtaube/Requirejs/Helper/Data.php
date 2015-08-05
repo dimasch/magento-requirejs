@@ -40,6 +40,7 @@ class Mtaube_Requirejs_Helper_Data extends Mage_Core_Helper_Abstract
             'mainConfigFile' => 'skin/frontend/base/default/js/common.js',
             'out' => $this->_getBuiltModuleSetJsBaseDir() . DS . $this->_getBuiltModuleSetJsFileName($moduleNames),
             'include' => implode(',', $moduleNames),
+            'optimize' => Mage::getStoreConfig('requirejs/settings/uglify') ? 'uglify' : 'none'
         );
         if (!in_array('common', $moduleNames)) $options['exclude'] = 'common';
 
@@ -47,11 +48,20 @@ class Mtaube_Requirejs_Helper_Data extends Mage_Core_Helper_Abstract
 
         shell_exec('r.js -o ' . $optionsJoined);
 
-        if ($this->_isCacheEnabled()) {
-            $moduleSetHash = $this->_getModuleSetHash($moduleNames);
+        $this->_cacheModuleSet($moduleNames);
+    }
 
-            $this->_saveCache($moduleSetHash, $moduleSetHash, array(self::CACHE_TAG));
-        }
+    /**
+     * Use the identifying hash to add the module set to the cache.
+     *
+     * @param array $moduleNames
+     * @return void
+     */
+    protected function _cacheModuleSet($moduleNames)
+    {
+        $moduleSetHash = $this->_getModuleSetHash($moduleNames);
+
+        $this->_saveCache($moduleSetHash, $moduleSetHash, array(self::CACHE_TAG));
     }
 
     /**
@@ -104,25 +114,9 @@ class Mtaube_Requirejs_Helper_Data extends Mage_Core_Helper_Abstract
      */
     protected function _isModuleSetCached($moduleNames)
     {
-        if ($this->_isCacheEnabled()) {
-            $moduleSetHash = $this->_getModuleSetHash($moduleNames);
+        $moduleSetHash = $this->_getModuleSetHash($moduleNames);
 
-            return $this->_loadCache($moduleSetHash) !== false;
-        }
-        else {
-            return false;
-        }
-    }
-
-    /**
-     * Check if chaching is enabled.
-     *
-     * @return bool
-     */
-    protected function _isCacheEnabled()
-    {
-        // TODO Add logic to disable / enable caching
-        return true;
+        return $this->_loadCache($moduleSetHash) !== false;
     }
 
     /**

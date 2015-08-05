@@ -69,4 +69,14 @@ class Mtaube_Requirejs_Block_Scripts extends Mage_Page_Block_Html_Head
     {
         unset($this->_moduleNames[$name]);
     }
+
+    /**
+     * Remove a module.
+     *
+     * @return bool
+     */
+    public function isBuildEnabled()
+    {
+        return Mage::getStoreConfig('requirejs/settings/build');
+    }
 }

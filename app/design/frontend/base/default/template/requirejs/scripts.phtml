@@ -17,9 +17,12 @@
 </script>
 
 <script type="text/javascript" src="<?php echo $this->getJsUrl('requirejs/require.js') ?>"></script>
-<script type="text/javascript" src="<?php echo $this->getBuiltCommonJsUrl() ?>"></script>
-<?php if ($isModules): ?>
-    <script type="text/javascript" src="<?php echo $this->getBuiltModuleSetJsUrl() ?>"></script>
+
+<?php if ($this->isBuildEnabled()): ?>
+    <script type="text/javascript" src="<?php echo $this->getBuiltCommonJsUrl() ?>"></script>
+    <?php if ($isModules): ?>
+        <script type="text/javascript" src="<?php echo $this->getBuiltModuleSetJsUrl() ?>"></script>
+    <?php endif ?>
 <?php endif ?>
 
 
