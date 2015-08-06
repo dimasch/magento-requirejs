@@ -11,11 +11,26 @@
 class Mtaube_Requirejs_Block_Scripts extends Mage_Page_Block_Html_Head
 {
     /**
-     * Modules to require()
+     * Helper object.
+     *
+     * @var Mtaube_Requirejs_Helper_Data
+     */
+    protected $_helper;
+
+    /**
+     * Modules to require().
      *
      * @var array
      */
     protected $_moduleNames = array();
+
+    /**
+     * Constructor
+     */
+    protected function _construct()
+    {
+        $this->_helper = Mage::helper('requirejs');
+    }
 
     /**
      * Get URL of the built common module.
@@ -24,7 +39,9 @@ class Mtaube_Requirejs_Block_Scripts extends Mage_Page_Block_Html_Head
      */
     public function getBuiltCommonJsUrl()
     {
-        return Mage::helper('requirejs')->getBuiltModuleSetJsUrl(array('common'));
+        $moduleNamesIncluded = array($this->_helper->getCommonModuleName());
+
+        return $this->_helper->getBuiltModuleSetJsUrl($moduleNamesIncluded);
     }
 
     /**
@@ -34,7 +51,29 @@ class Mtaube_Requirejs_Block_Scripts extends Mage_Page_Block_Html_Head
      */
     public function getBuiltModuleSetJsUrl()
     {
-        return Mage::helper('requirejs')->getBuiltModuleSetJsUrl($this->getModuleNames());
+        $moduleNamesExcluded = array($this->_helper->getCommonModuleName());
+
+        return $this->_helper->getBuiltModuleSetJsUrl($this->getModuleNames(), $moduleNamesExcluded);
+    }
+
+    /**
+     * Get URL of the built common module.
+     *
+     * @return string
+     */
+    public function isBuildEnabled()
+    {
+        return $this->_helper->isBuildEnabled();
+    }
+
+    /**
+     * Get the name of the common module, which includes the config.
+     *
+     * @return bool
+     */
+    public function getCommonModuleBaseDir()
+    {
+        return $this->_helper->getCommonModuleBaseDir();
     }
 
     /**
@@ -68,15 +107,5 @@ class Mtaube_Requirejs_Block_Scripts extends Mage_Page_Block_Html_Head
     public function removeModule($name)
     {
         unset($this->_moduleNames[$name]);
-    }
-
-    /**
-     * Remove a module.
-     *
-     * @return bool
-     */
-    public function isBuildEnabled()
-    {
-        return Mage::getStoreConfig('requirejs/settings/build');
     }
 }

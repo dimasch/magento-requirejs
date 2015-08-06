@@ -13,36 +13,21 @@ class Mtaube_Requirejs_Helper_Data extends Mage_Core_Helper_Abstract
     const CACHE_TAG = 'requirejs';
 
     /**
-     * Get the URL of the built module set. If the built module set is not cached, build it first.
-     *
-     * @param array $moduleNames
-     * @return string
-     */
-    public function getBuiltModuleSetJsUrl($moduleNames)
-    {
-        if (!$this->_isModuleSetCached($moduleNames)) {
-            $this->_buildModuleSet($moduleNames);
-        }
-
-        return $this->_getBuiltModuleSetJsBaseUrl() . DS . $this->_getBuiltModuleSetJsFileName($moduleNames);
-    }
-
-    /**
      * Build the module set file.
      *
      * @param array $moduleNames
+     * @param array $moduleNamesExcluded
      * @return void
      */
-    protected function _buildModuleSet($moduleNames)
+    protected function _buildModuleSet($moduleNames, array $moduleNamesExcluded = array())
     {
-        // TODO Add settings to change location of mainConfigFile and modules
         $options = array(
-            'mainConfigFile' => 'skin/frontend/base/default/js/common.js',
-            'out' => $this->_getBuiltModuleSetJsBaseDir() . DS . $this->_getBuiltModuleSetJsFileName($moduleNames),
+            'mainConfigFile' => $this->_getMainConfigFile(),
+            'out' => $this->_getBuiltModuleSetJsFile($moduleNames),
             'include' => implode(',', $moduleNames),
-            'optimize' => Mage::getStoreConfig('requirejs/settings/uglify') ? 'uglify' : 'none'
+            'optimize' => $this->_getOptimizer(),
+            'exclude' => implode(',', $moduleNamesExcluded)
         );
-        if (!in_array('common', $moduleNames)) $options['exclude'] = 'common';
 
         $optionsJoined = implode(' ', array_map(function ($v, $k) { return $k . '=' . $v; }, $options, array_keys($options)));
 
@@ -85,6 +70,16 @@ class Mtaube_Requirejs_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * Get absolute path to the built module set file.
+     *
+     * @return string
+     */
+    protected function _getBuiltModuleSetJsFile($moduleNames)
+    {
+        return $this->_getBuiltModuleSetJsBaseDir() . DS . $this->_getBuiltModuleSetJsFileName($moduleNames);
+    }
+
+    /**
      * Get the file name of the built module set.
      *
      * @param array $moduleNames
@@ -93,6 +88,19 @@ class Mtaube_Requirejs_Helper_Data extends Mage_Core_Helper_Abstract
     protected function _getBuiltModuleSetJsFileName($moduleNames)
     {
         return $this->_getModuleSetHash($moduleNames) . '.js';
+    }
+
+    /**
+     * Get absolute path to the common module file using the theme fallback pattern.
+     *
+     * @return string
+     */
+    protected function _getMainConfigFile()
+    {
+        $commonModuleBaseDir = $this->getCommonModuleBaseDir();
+        $commonModuleName = $this->getCommonModuleName();
+
+        return Mage::getDesign()->getFilename($commonModuleBaseDir . DS . $commonModuleName . '.js', array('_type'=>'skin'));
     }
 
     /**
@@ -120,12 +128,68 @@ class Mtaube_Requirejs_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * Get the optimze setting.
+     *
+     * @return string
+     */
+    protected function _getOptimizer()
+    {
+        return Mage::getStoreConfig('requirejs/settings/uglify') ? 'uglify' : 'none';
+    }    
+
+    /**
      * Clean the requirejs cache of the built files.
      *
-     * @return bool
+     * @return void
      */
     public function cleanCache()
     {
         $this->_cleanCache(array(self::CACHE_TAG));
+    }
+
+    /**
+     * Get the URL of the built module set. If the built module set is not cached, build it first.
+     *
+     * @param array $moduleNames
+     * @param array $moduleNamesExcluded
+     * @return string
+     */
+    public function getBuiltModuleSetJsUrl($moduleNames, array $moduleNamesExcluded = array())
+    {
+        if (!$this->_isModuleSetCached($moduleNames)) {
+            $this->_buildModuleSet($moduleNames, $moduleNamesExcluded);
+        }
+
+        return $this->_getBuiltModuleSetJsBaseUrl() . DS . $this->_getBuiltModuleSetJsFileName($moduleNames);
+    }
+
+    /**
+     * Get the base directory of the common module relative to the skin base dir.
+     *
+     * @return string
+     */
+    public function getCommonModuleBaseDir()
+    {
+        return 'js' . DS . Mage::getStoreConfig('requirejs/settings/common_module_base_dir');
+    }
+
+    /**
+     * Get the name of the common module, which includes the config.
+     *
+     * @return string
+     */
+    public function getCommonModuleName()
+    {
+        return Mage::getStoreConfig('requirejs/settings/common_module_name');
+    }
+
+    /**
+     * Check whether r.js is enabled.
+     *
+     * @return bool
+     */
+    public function isBuildEnabled()
+    {
+        return Mage::getStoreConfig('requirejs/settings/build');
     }
 }

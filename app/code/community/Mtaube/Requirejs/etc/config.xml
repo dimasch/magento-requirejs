@@ -72,9 +72,11 @@
 
     <default>
         <requirejs>
-            <settings>                
-                <active>1</active>         
-            </settings>      
+            <settings>
+                <active>1</active>
+                <common_module_base_dir>requirejs</common_module_base_dir>
+                <common_module_name>common</common_module_name>
+            </settings>
         </requirejs>
     </default>
 
