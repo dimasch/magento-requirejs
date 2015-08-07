@@ -64,6 +64,14 @@ To remove modules from specific pages use the ```removeModule``` action in your 
 
     If "No" all output will be disabled.
 
+- Common Module Base Dir
+
+    Base dir for all scripts, relative to the js skin directory. The default is ```requirejs```, so the base directory is ```skin/frontend/base/default/js/requirejs```. If a custom theme is used, the base directory is ```skin/frontend/PACKAGE_NAME/THEME_NAME/js/requirejs``` but will fallback according to the usual theme fallback pattern. The common module file should be at the root of this directory.
+
+- Common Module Name
+
+    The name of the common module file. The default is ```common```, so the file name is ```common.js```. Do not include the ```.js``` file extension.
+
 - Build Module Sets
 
     If "Yes" and the [r.js optimizer](https://github.com/jrburke/r.js) is installed, the build layers will be compiled and cached automatically. To bust the cache use Magento's "Flush Magento Cache" or "Flush JavaScript/CSS Cache" button in the Cache Management admin dashboard.
