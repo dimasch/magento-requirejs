@@ -10,8 +10,6 @@
 
 class Mtaube_Requirejs_Helper_Data extends Mage_Core_Helper_Abstract
 {
-    const CACHE_TAG = 'requirejs';
-
     /**
      * Build the module set file.
      *
@@ -21,6 +19,7 @@ class Mtaube_Requirejs_Helper_Data extends Mage_Core_Helper_Abstract
      */
     protected function _buildModuleSet($moduleNames, array $moduleNamesExcluded = array())
     {
+        $id = $this->_getModuleSetId($moduleNames);
         $options = array(
             'mainConfigFile' => $this->_getMainConfigFile(),
             'out' => $this->_getBuiltModuleSetJsFile($moduleNames),
@@ -33,20 +32,7 @@ class Mtaube_Requirejs_Helper_Data extends Mage_Core_Helper_Abstract
 
         shell_exec('r.js -o ' . $optionsJoined);
 
-        $this->_cacheModuleSet($moduleNames);
-    }
-
-    /**
-     * Use the identifying hash to add the module set to the cache.
-     *
-     * @param array $moduleNames
-     * @return void
-     */
-    protected function _cacheModuleSet($moduleNames)
-    {
-        $moduleSetHash = $this->_getModuleSetHash($moduleNames);
-
-        $this->_saveCache($moduleSetHash, $moduleSetHash, array(self::CACHE_TAG));
+        Mage::getModel('requirejs/cache')->save($id);
     }
 
     /**
@@ -87,7 +73,7 @@ class Mtaube_Requirejs_Helper_Data extends Mage_Core_Helper_Abstract
      */
     protected function _getBuiltModuleSetJsFileName($moduleNames)
     {
-        return $this->_getModuleSetHash($moduleNames) . '.js';
+        return $this->_getModuleSetId($moduleNames) . '.js';
     }
 
     /**
@@ -109,22 +95,23 @@ class Mtaube_Requirejs_Helper_Data extends Mage_Core_Helper_Abstract
      * @param array $moduleNames
      * @return string
      */
-    protected function _getModuleSetHash($moduleNames)
+    protected function _getModuleSetId($moduleNames)
     {
         return md5(implode($moduleNames));
     }
 
     /**
      * Check the cache for the identifying hash of the module set.
+     * If the identifying hash is found, we assume the built module set file exists.
      *
      * @param array $moduleNames
      * @return bool
      */
     protected function _isModuleSetCached($moduleNames)
     {
-        $moduleSetHash = $this->_getModuleSetHash($moduleNames);
+        $moduleSetId = $this->_getModuleSetId($moduleNames);
 
-        return $this->_loadCache($moduleSetHash) !== false;
+        return Mage::getModel('requirejs/cache')->isCached($moduleSetId);
     }
 
     /**
@@ -135,16 +122,6 @@ class Mtaube_Requirejs_Helper_Data extends Mage_Core_Helper_Abstract
     protected function _getOptimizer()
     {
         return Mage::getStoreConfig('requirejs/settings/uglify') ? 'uglify' : 'none';
-    }    
-
-    /**
-     * Clean the requirejs cache of the built files.
-     *
-     * @return void
-     */
-    public function cleanCache()
-    {
-        $this->_cleanCache(array(self::CACHE_TAG));
     }
 
     /**
