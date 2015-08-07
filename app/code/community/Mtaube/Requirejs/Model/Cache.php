@@ -64,7 +64,6 @@ class Mtaube_Requirejs_Model_Cache
      */
     public function save($moduleSetId)
     {
-        Mage::log('Mtaube_Requirejs_Model_Cache.save()');
         Mage::app()->saveCache($moduleSetId, $moduleSetId, $this->_cacheTags);
     }
 }
