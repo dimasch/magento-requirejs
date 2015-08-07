@@ -5,6 +5,6 @@ app/etc/modules/Mtaube_Requirejs.xml                        app/etc/modules/Mtau
 
 js/requirejs                                                js/requirejs
 
-skin/frontend/base/default/js/common.js                     skin/frontend/base/default/js/common.js
-skin/frontend/base/default/js/product.js                    skin/frontend/base/default/js/product.js
-skin/frontend/base/default/js/lib                           skin/frontend/base/default/js/lib
+skin/frontend/base/default/js/requirejs/common.js                     skin/frontend/base/default/js/requirejs/common.js
+skin/frontend/base/default/js/requirejs/product.js                    skin/frontend/base/default/js/requirejs/product.js
+skin/frontend/base/default/js/requirejs/lib                           skin/frontend/base/default/js/requirejs/lib

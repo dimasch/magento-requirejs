@@ -17,6 +17,6 @@ class Mtaube_Requirejs_Model_Observer
      */
     public function cleanBuiltModuleSetJs(Varien_Event_Observer $observer)
     {
-        Mage::helper('requirejs')->cleanCache();
+        Mage::getModel('requirejs/cache')->clean();
     }
 }

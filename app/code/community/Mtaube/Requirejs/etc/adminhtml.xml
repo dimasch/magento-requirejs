@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mtaube (https://github.com/mtaube)
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2015 Matt Taube
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <requirejs translate="title">
+                                        <title>RequireJS Settings</title>
+                                    </requirejs>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

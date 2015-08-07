@@ -12,7 +12,7 @@
 <config>
     <modules>
         <Mtaube_Requirejs>
-            <version>0.1.0</version>
+            <version>1.0.0</version>
         </Mtaube_Requirejs>
     </modules>
 
@@ -46,6 +46,39 @@
             </requirejs>
         </models>
     </global>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <use>admin</use>
+                    <modules>
+                        <Mtaube_Requirejs before="Mage_Adminhtml">Mtaube_Requirejs_Adminhtml</Mtaube_Requirejs>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <requirejs>
+                    <file>adminhtml.xml</file>
+                </requirejs>
+            </updates>
+        </layout>
+    </adminhtml>
+
+    <default>
+        <requirejs>
+            <settings>
+                <active>1</active>
+                <common_module_base_dir>requirejs</common_module_base_dir>
+                <common_module_name>common</common_module_name>
+            </settings>
+        </requirejs>
+    </default>
 
     <frontend>
         <layout>

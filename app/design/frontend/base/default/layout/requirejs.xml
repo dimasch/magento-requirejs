@@ -12,9 +12,12 @@
 <layout version="0.1.0">
     <default>
         <reference name="before_body_end">
-            <block type="requirejs/scripts" name="requirejs" template="requirejs/scripts.phtml">
+            <block type="requirejs/scripts" name="requirejs">
                 <action method="addJs">
                     <script>requirejs/require.js</script>
+                </action>
+                <action method="setTemplate" ifconfig="requirejs/settings/active">
+                    <template>requirejs/scripts.phtml</template>
                 </action>
             </block>
         </reference>
