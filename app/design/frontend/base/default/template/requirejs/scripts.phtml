@@ -12,16 +12,18 @@
 
 <script type="text/javascript">
     var require = {
-        baseUrl: '<?php echo $this->getSkinUrl("js") ?>',
+        baseUrl: '<?php echo $this->getSkinUrl($this->getCommonModuleBaseDir()) ?>',
     };
 </script>
 
 <script type="text/javascript" src="<?php echo $this->getJsUrl('requirejs/require.js') ?>"></script>
-<script type="text/javascript" src="<?php echo $this->getBuiltCommonJsUrl() ?>"></script>
-<?php if ($isModules): ?>
-    <script type="text/javascript" src="<?php echo $this->getBuiltModuleSetJsUrl() ?>"></script>
-<?php endif ?>
 
+<?php if ($this->isBuildEnabled()): ?>
+    <script type="text/javascript" src="<?php echo $this->getBuiltCommonJsUrl() ?>"></script>
+    <?php if ($isModules): ?>
+        <script type="text/javascript" src="<?php echo $this->getBuiltModuleSetJsUrl() ?>"></script>
+    <?php endif ?>
+<?php endif ?>
 
 <script>
     if (window.jQuery) $.noConflict();

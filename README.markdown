@@ -22,7 +22,7 @@ The module can also be installed manually by downloading the files and moving th
 
 ### r.js
 
-To make the best use of this module, and RequireJS in general, you will also need to install the [r.js optimizer](https://github.com/jrburke/r.js). This tool will combine related scripts together into build layers, allowing them to be served in a single compiled file. Without it, the scripts will be served separately.
+To make the best use of this module, and RequireJS in general, you will also need to install the [r.js optimizer](https://github.com/jrburke/r.js). This tool will combine related scripts together into build layers, allowing them to be served in a single compiled file. Without it, the scripts will be served individually.
 
 Using [Node](https://nodejs.org/) and [npm](https://www.npmjs.com/) is the recommended way to install r.js:
 
@@ -58,6 +58,16 @@ To remove modules from specific pages use the ```removeModule``` action in your 
 </catalog_product_view>
 ```
 
-### Build / Cache
+## Settings
 
-If the [r.js optimizer](https://github.com/jrburke/r.js) is installed and configured the build layers will be compiled and cached automatically. To bust the cache use Magento's "Flush JavaScript/CSS Cache" button in the Cache Management admin dashboard.
+- Enabled
+
+    If "No" all output will be disabled.
+
+- Build Module Sets
+
+    If "Yes" and the [r.js optimizer](https://github.com/jrburke/r.js) is installed, the build layers will be compiled and cached automatically. To bust the cache use Magento's "Flush Magento Cache" or "Flush JavaScript/CSS Cache" button in the Cache Management admin dashboard.
+
+- Uglify Built Module Sets
+
+    If "Yes" the scripts will be minified using UglifyJS during the build.
