@@ -30,9 +30,10 @@ class Mtaube_Requirejs_Helper_Data extends Mage_Core_Helper_Abstract
 
         $optionsJoined = implode(' ', array_map(function ($v, $k) { return $k . '=' . $v; }, $options, array_keys($options)));
 
-        shell_exec('r.js -o ' . $optionsJoined);
+        $output = shell_exec('r.js -o ' . $optionsJoined);
 
-        Mage::getModel('requirejs/cache')->save($id);
+        if ($output) Mage::getModel('requirejs/cache')->save($id);
+        else { Mage::throwException('The r.js command failed, please verify installation or disable RequireJS build.'); }
     }
 
     /**
