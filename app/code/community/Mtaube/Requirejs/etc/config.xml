@@ -12,7 +12,7 @@
 <config>
     <modules>
         <Mtaube_Requirejs>
-            <version>0.1.0</version>
+            <version>1.0.0</version>
         </Mtaube_Requirejs>
     </modules>
 
