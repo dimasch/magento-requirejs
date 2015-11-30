@@ -1,0 +1,25 @@
+{
+  "name": "requirejs",
+  "authors": [
+    "Dmitry Schegolikhin <d.shegolihin@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.10.2",
+    "modernizr": "~3.2.0",
+    "underscore": "~1.8.3",
+    "json2": "*",
+    "backbone": "~1.2.3"
+  }
+}
