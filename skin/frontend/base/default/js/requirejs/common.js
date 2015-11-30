@@ -9,10 +9,10 @@
 
 require.config({
     paths: {
-        'backbone': 'lib/backbone',
-        'jquery': 'lib/jquery',
-        'json2': 'lib/json2',
-        'underscore': 'lib/underscore',
+        'backbone': 'lib/backbone/backbone',
+        'jquery': 'lib/jquery/jquery',
+        'json2': 'lib/json2/json2',
+        'underscore': 'lib/underscore/underscore',
     },
     shim: {
         // NOTE Shim required because Backbone / Underscore are not AMD modules.

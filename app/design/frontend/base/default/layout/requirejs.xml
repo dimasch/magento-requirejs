@@ -22,4 +22,12 @@
             </block>
         </reference>
     </default>
+
+    <cms_index_index>
+        <reference name="requirejs">
+            <action method="addModule">
+                <name>home</name>
+            </action>
+        </reference>
+    </cms_index_index>
 </layout>
