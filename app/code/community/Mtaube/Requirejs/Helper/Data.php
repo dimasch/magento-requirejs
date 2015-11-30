@@ -37,13 +37,24 @@ class Mtaube_Requirejs_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * Get the dist directory where built module sets are saved.
+     *
+     * @return string
+     */
+    protected function _getDistDir()
+    {
+        $commonModuleBaseDir = $this->getCommonModuleBaseDir();
+        return $commonModuleBaseDir . DS . 'dist';
+    }
+
+    /**
      * Get the base directory where built module sets are saved.
      *
      * @return string
      */
     protected function _getBuiltModuleSetJsBaseDir()
     {
-        return Mage::getBaseDir('media') . DS . 'js' . DS . 'requirejs';
+        return Mage::getDesign()->getSkinBaseDir() . DS . $this->_getDistDir();
     }
 
     /**
@@ -53,7 +64,7 @@ class Mtaube_Requirejs_Helper_Data extends Mage_Core_Helper_Abstract
      */
     protected function _getBuiltModuleSetJsBaseUrl()
     {
-        return Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'js' . DS . 'requirejs';
+        return Mage::getDesign()->getSkinUrl() . $this->_getDistDir();
     }
 
     /**
@@ -98,7 +109,7 @@ class Mtaube_Requirejs_Helper_Data extends Mage_Core_Helper_Abstract
      */
     protected function _getModuleSetId($moduleNames)
     {
-        return md5(implode($moduleNames));
+        return trim($moduleNames[0]);
     }
 
     /**
