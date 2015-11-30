@@ -15,7 +15,7 @@ Using [modman](https://github.com/colinmollenhour/modman) is the recommended way
 
 ```
 $ modman init
-$ modman clone git@github.com:mtaube/magento-requirejs.git
+$ modman clone git@github.com:gdemad/magento-requirejs.git
 ```
 
 The module can also be installed manually by downloading the files and moving them to the correct location alongside the Magento core files, although it is not recommended to mix community module files with Magento core files. If you install manually be sure to re-install the module after each Magento upgrade.
