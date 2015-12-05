@@ -3,9 +3,7 @@
 /app/design/frontend/base/default/template/requirejs/scripts.phtml /app/design/frontend/base/default/template/requirejs/scripts.phtml
 /app/etc/modules/Mtaube_Requirejs.xml /app/etc/modules/Mtaube_Requirejs.xml
 /js/requirejs/require.js /js/requirejs/require.js
-/skin/frontend/base/default/js/requirejs/.bowerrc /skin/frontend/base/default/js/requirejs/.bowerrc
 /skin/frontend/base/default/js/requirejs/bower.json /skin/frontend/base/default/js/requirejs/bower.json
 /skin/frontend/base/default/js/requirejs/common.js /skin/frontend/base/default/js/requirejs/common.js
 /skin/frontend/base/default/js/requirejs/home.js /skin/frontend/base/default/js/requirejs/home.js
-/skin/frontend/base/default/js/requirejs/lib /skin/frontend/base/default/js/requirejs/lib
 /skin/frontend/base/default/js/requirejs/product.js /skin/frontend/base/default/js/requirejs/product.js
