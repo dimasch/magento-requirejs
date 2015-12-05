@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
+    "requirejs": "2.1.22",
     "jquery": "1.10.2",
     "underscore": "~1.8.3",
     "json2": "*",
