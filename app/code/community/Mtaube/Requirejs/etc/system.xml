@@ -23,7 +23,7 @@
             <sort_order>0</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>
-            <show_in_store>1</show_in_store>       
+            <show_in_store>1</show_in_store>
             <groups>
                 <settings translate="label">
                     <label>Settings</label>
@@ -80,6 +80,15 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </uglify>
+                        <uglify_processor translate="label">
+                            <label>Uglify Processor</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Uglify processor library uglify or uglify2.</comment>
+                        </uglify_processor>
                     </fields>
                 </settings>
             </groups>
