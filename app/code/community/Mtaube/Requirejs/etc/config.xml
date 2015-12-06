@@ -76,6 +76,7 @@
                 <active>1</active>
                 <common_module_base_dir>requirejs</common_module_base_dir>
                 <common_module_name>common</common_module_name>
+                <uglify_processor>uglify2</uglify_processor>
             </settings>
         </requirejs>
     </default>

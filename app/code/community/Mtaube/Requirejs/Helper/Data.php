@@ -133,7 +133,8 @@ class Mtaube_Requirejs_Helper_Data extends Mage_Core_Helper_Abstract
      */
     protected function _getOptimizer()
     {
-        return Mage::getStoreConfig('requirejs/settings/uglify') ? 'uglify' : 'none';
+        $processor = Mage::getStoreConfig('requirejs/settings/uglify_processor');
+        return Mage::getStoreConfig('requirejs/settings/uglify') ? $processor : 'none';
     }
 
     /**
